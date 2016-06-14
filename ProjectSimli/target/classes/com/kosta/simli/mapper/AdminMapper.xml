@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+	"-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kosta.simli.dao.AdminDAO">
+
+	
+	<delete id="schedule_delete">
+		delete from schedule where employeeid = #{id}
+	</delete>
+	
+	<select id="schedule_join" parameterType="java.lang.String">
+		insert into schedule (employeeid) values(#{id})
+	</select>
+
+	<select id="scheduleList" resultType="com.kosta.simli.dto.ScheduleDTO">
+		select * from schedule
+	</select>
+
+	<select id="adminpage_view" parameterType="java.lang.String" resultType="com.kosta.simli.dto.MemberDto">
+		select * from membertable where id = #{id}
+	</select>
+	
+	<select id="adminmodify_view" parameterType="java.lang.String" resultType="com.kosta.simli.dto.MemberDto">
+		select * from membertable where id = #{id}
+	</select>
+	
+	<select id="adminmember_phone" parameterType="java.lang.String" resultType="java.lang.String">
+		select phone from membertable where id = #{id}
+	</select>
+	
+	<update id="adminmember_modify" parameterType="com.kosta.simli.dto.MemberDto">
+		update membertable set pwd = #{pwd}, email = #{email}, phone = #{phone}, addr = #{addr}, therapy1 = #{ therapy1 }, therapy2 = #{ therapy2 }, therapy3 = #{ therapy3 }, part = #{ part } where id = #{ id }
+	</update>
+	
+	<select id="adminmember_list" resultType="com.kosta.simli.dto.MemberDto">
+		select * from membertable
+	</select>
+	
+	<select id="employeemember_list" resultType="com.kosta.simli.dto.MemberDto">
+		select * from membertable where id in (select id from role where role_name = 'ROLE_PKEMPLOYEE')
+	</select>
+	
+	<select id="usermember_list" resultType="com.kosta.simli.dto.MemberDto">
+		select * from membertable where id in (select id from role where role_name = 'ROLE_PKUSER')
+	</select>
+	
+	<select id="adminmember_content" parameterType="java.lang.String" resultType="com.kosta.simli.dto.MemberDto">
+		select * from membertable where id = #{ id }
+	</select>
+	
+	<delete id="adminmlist_delete" parameterType="com.kosta.simli.dto.MemberDto">
+		delete from membertable where id = #{id}
+	</delete>
+	
+	<delete id="adminmrole_delete" parameterType="com.kosta.simli.dto.MemberDto">
+		delete from role where id = #{id}
+	</delete>
+	
+	<insert id="admin_join">
+		insert into membertable (id, pwd, name, email, phone, gender, birth, addr, therapy1, therapy2, therapy3, part, mem_date)
+		values (#{id}, #{pwd}, #{name}, #{email}, #{phone}, #{gender}, #{birth}, #{addr}, #{ therapy1 }, #{ therapy2 }, #{ therapy3 }, #{ part }, sysdate)
+	</insert>
+	
+	<insert id="adminRole_join">
+		insert into role (id, role_name) values(#{id}, #{roleName})
+	</insert>
+	
+	<select id="employeeNameList" resultType="com.kosta.simli.dto.MemberDto">
+		select * from membertable where part = #{part}
+	</select>
+	
+	<select id="categoryPriceMonthList" resultType="Integer">
+		select categoryprice from(
+			select to_char(appointday, 'yyyymmdd') as appointday,employeeid,categoryprice from reservation
+		) where employeeid = #{param1} and appointday like #{param2}||#{param3}||'%' 
+	</select>
+	
+	<select id="userMoneyYearList" resultType="com.kosta.simli.dto.ReserDTO">
+		select memberid,memberconsult,resertype,consulttype,categoryprice,appointday from (
+			select memberid,memberconsult,resertype,consulttype,categoryprice,
+		    to_char(appointday, 'yyyy-mm-dd') as appointday
+			from reservation)
+		where appointday like #{param1}||'%' order by appointday desc
+	</select>
+	
+	<select id="userMoneyMonthList" resultType="com.kosta.simli.dto.ReserDTO">
+		select memberid,memberconsult,resertype,consulttype,categoryprice,appointday from (
+			select memberid,memberconsult,resertype,consulttype,categoryprice,
+		    to_char(appointday, 'yyyy-mm-dd') as appointday
+			from reservation)
+		where appointday like #{param1}||'-'||#{param2}||'%' order by appointday desc 
+	</select>
+	
+	<select id="reserList" resultType="com.kosta.simli.dto.ReserDTO">
+  		select m.currentday, m.name as memname, e.name as empname, m.appointday, m.appointweek,
+     		floor(m.appointtime/100) as ahour, floor(m.appointtime-(m.appointtime/100)*100) as aminute, 
+     		m.consulttype, m.resertype, m.memberconsult, m.patron, m.categoryprice
+    		from
+     		(select m.name, r.* from membertable m join reservation r on m.ID = r.MEMBERID) m 
+    		JOIN 
+     		(select m.name, r.* from membertable m join reservation r on m.ID = r.EMPLOYEEID) e 
+     		on m.num = e.num 
+     		where m.appointday = #{appointday}
+	</select>
+
+	<!-- <select id="login_id" parameterType="java.lang.String" resultType="int">
+		select count(*) from membertable where id = #{ id }
+	</select>
+	
+	<select id="login_pwd" parameterType="java.lang.String" resultType="java.lang.String">
+		select pwd from membertable where id = #{ id }
+	</select>
+
+	
+
+	<delete id="member_delete" parameterType="java.lang.String">
+		delete from membertable where id = #{id}
+	</delete>
+	
+	
+	<select id="member_phone" parameterType="java.lang.String" resultType="java.lang.String">
+		select phone from membertable where id = #{id}
+	</select>
+
+	
+	<update id="memberlist_modify" parameterType="com.kosta.simli.dto.MemberDto">
+		update membertable set pwd = #{pwd}, email = #{email}, phone = #{phone}, addr = #{addr}, therapy1 = #{ therapy1 }, therapy2 = #{ therapy2 }, therapy3 = #{ therapy3 }, part = #{ part } where id = #{ id }
+	</update> -->
+
+</mapper>

@@ -1,0 +1,38 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<style>
+table#asidest tr td {
+	text-align: center;
+	width: 150px;
+	height: 30px;
+}
+
+table#asidest tr td:hover {
+	background-color: green;
+	border-radius: 50px;
+	cursor: pointer;
+}
+</style>
+<table id="asidest">
+	<tr>
+		<td><p onclick="ajaxmenu('ajax_total_inspect')">종합심리검사</p></td>
+	</tr>
+	<tr>
+		<td><p onclick="ajaxmenu('ajax_character_inspect')">성격유형검사</p></td>
+	</tr>
+	<tr>
+		<td><p onclick="ajaxmenu('ajax_study_inspect')">학습 및 진로검사</p></td>
+	</tr>
+	<tr>
+		<td><p onclick="ajaxmenu('ajax_play_inspect')">놀이평가</p></td>
+	</tr>
+	<tr>
+		<td><p onclick="ajaxmenu('ajax_baby_inspect')">영유아발달검사</p></td>
+	</tr>
+	<tr>
+		<td><p onclick="ajaxmenu('ajax_concentration_inspect')">주의집중력검사</p></td>
+	</tr>
+	<tr>
+		<td><p onclick="ajaxmenu('ajax_selftest_inspect')">자가진단테스트</p></td>
+	</tr>
+</table>

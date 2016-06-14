@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+	"-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kosta.simli.dao.MypageDAO">
+
+	<select id="employeepage_view" parameterType="java.lang.String"
+		resultType="com.kosta.simli.dto.MemberDto">
+		select * from membertable where id = #{id}
+	</select>
+
+	<select id="employee_scheduleCheck" resultType="com.kosta.simli.dto.ScheduleDTO">
+		select * from
+		schedule where employeeid = #{id}
+	</select>
+	<select id="reserEmployeeList" resultType="com.kosta.simli.dto.ReserDTO">
+		select m.name as
+		memname, e.name as empname,floor(m.appointtime/100) as ahour,
+		floor(m.appointtime-(m.appointtime/100)*100) as aminute, m.* from
+		(select m.name, r.* from membertable m join
+		reservation r on m.ID =
+		r.MEMBERID) m JOIN (select m.name, r.* from membertable m join
+		reservation r on m.ID = r.EMPLOYEEID) e on m.num = e.num where
+		m.employeeid = #{id}
+	</select>
+	<select id="reserMemberList" resultType="com.kosta.simli.dto.ReserDTO">
+		select m.name as
+		memname, e.name as empname, floor(m.appointtime/100) as ahour,
+		floor(m.appointtime-(m.appointtime/100)*100) as aminute, m.* from
+		(select m.name, r.* from membertable m join
+		reservation r on m.ID =
+		r.MEMBERID) m JOIN (select m.name, r.* from membertable m join
+		reservation r on m.ID = r.EMPLOYEEID) e on m.num = e.num where
+		m.memberid = #{id}
+	</select>
+	<update id="reserManage_Employee_Update">
+		update reservation set
+		ref = #{param1} where num =
+		#{param2}
+	</update>
+	<delete id="reserDelete">
+		delete reservation where num = #{reNum}
+	</delete>
+	<select id="payConfirmPartCheck" resultType="String">
+		select part from
+		membertable where id = #{id}
+	</select>
+	<select id="IndiviConsultCount" resultType="int">
+		select count(*) from(
+		select to_char(appointday, 'yyyymmdd') as
+		appointday,employeeid,consulttype,resertype from reservation
+		) where
+		employeeid = #{param1} and consulttype='개인' and resertype='상담' and
+		appointday like #{param2}||#{param3}||'%'
+	</select>
+	<select id="IndiviTherapyCount" resultType="int">
+		select count(*) from(
+		select to_char(appointday, 'yyyymmdd') as
+		appointday,employeeid,consulttype,resertype from reservation
+		) where
+		employeeid = #{param1} and consulttype='개인' and resertype='상담치료' and
+		appointday like #{param2}||#{param3}||'%'
+	</select>
+	<select id="groupConsultCount" resultType="int">
+		select count(*) from(
+		select to_char(appointday, 'yyyymmdd') as
+		appointday,employeeid,consulttype,resertype from reservation
+		) where
+		employeeid = #{param1} and consulttype='집단' and resertype='상담' and
+		appointday like #{param2}||#{param3}||'%'
+	</select>
+	<select id="groupTherapyCount" resultType="int">
+		select count(*) from(
+		select to_char(appointday, 'yyyymmdd') as
+		appointday,employeeid,consulttype,resertype from reservation
+		) where
+		employeeid = #{param1} and consulttype='집단' and resertype='상담치료' and
+		appointday like #{param2}||#{param3}||'%'
+	</select>
+
+	<select id="examinationCount" resultType="int">
+		select count(*) from(
+		select to_char(appointday, 'yyyymmdd') as
+		appointday,employeeid,consulttype,resertype from reservation
+		) where
+		employeeid = #{param1} and resertype='검사' and appointday like
+		#{param2}||#{param3}||'%'
+	</select>
+
+	<select id="therapistTherapyCount" resultType="int">
+		select count(*)
+		from(
+		select to_char(appointday, 'yyyymmdd') as
+		appointday,employeeid,consulttype,resertype from reservation
+		) where
+		employeeid = #{param1} and resertype like '%치료' and appointday like
+		#{param2}||#{param3}||'%'
+	</select>
+
+	<select id="searchAppointdaySchedule" resultType="com.kosta.simli.dto.ReserDTO">
+		select * from
+		reservation where appointday = #{appointday}
+	</select>
+
+</mapper>

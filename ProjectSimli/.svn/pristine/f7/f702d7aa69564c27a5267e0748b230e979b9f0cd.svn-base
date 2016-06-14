@@ -1,0 +1,300 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>kosta 109</title>
+<style type="text/css">
+#mainview {
+	width: 1000px;
+	height: 350px;
+	text-align: center;
+	vertical-align: middle;
+	margin: auto;
+}
+
+#booking {
+	width: 400px;
+	height: 300px;
+	border: 3px #2ecc71 solid;
+	border-radius: 10px;
+}
+
+#choice {
+	padding-top: 50px;
+}
+
+#book {
+	border: 3px #2ecc71 solid;
+	width: 100px;
+	height: 30px;
+	border-radius: 20px;
+	margin-top: 30px;
+}
+
+#book p {
+	margin: 0;
+	cursor: pointer;
+}
+
+#pop {
+	width: 400px;
+	height: 300px;
+	background: white;
+	color: black;
+	position: absolute;
+	top: 500px;
+	left: 500px;
+	text-align: center;
+	border: 1px solid #2ecc71;
+	z-index: 100;
+	display: none;
+	border-radius: 20px;
+}
+
+#onmain {
+	border: 3px #A6A6A6 solid;
+	border-radius: 10px;
+}
+
+#onmain a {
+	text-decoration: none;
+}
+
+#ontop {
+	background-color: #747474;
+}
+
+#ontop td {
+	border-radius: 5px;
+}
+
+.emp-indicators span {
+	float: left;
+	background-color: #747474;
+	margin: 5px;
+	padding: 5px 15px 5px 15px;
+	border-radius: 20px;
+	cursor: pointer;
+	color: white;
+}
+
+.emp-indicators span:hover {
+	background-color: #3E3E3E;
+	color: #AAAAAA;
+}
+</style>
+</head>
+<body>
+	<br>
+	<div id="carousel-example-generic" class="carousel slide"
+		data-ride="carousel">
+		<!-- Indicators -->
+		<ol class="carousel-indicators">
+			<li data-target="#carousel-example-generic" data-slide-to="0"
+				class="active"></li>
+			<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+			<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+			<li data-target="#carousel-example-generic" data-slide-to="3"></li>
+		</ol>
+
+		<!-- Wrapper for slides -->
+		<div class="carousel-inner" role="listbox" align="center">
+			<div class="item active">
+				<img src="resources/images/employee_introduce/kull.png" alt="메인사진1"
+					width="1250px" height="400px">
+				<div class="carousel-caption"></div>
+			</div>
+			<div class="item" align="center">
+				<img src="resources/images/employee_introduce/kook.png" alt="메인사진2"
+					width="1250px" height="400px">
+				<div class="carousel-caption"></div>
+			</div>
+
+			<div class="item" align="center">
+				<img src="resources/images//employee_introduce/ram.png" alt="메인사진3"
+					width="1250px" height="400px">
+				<div class="carousel-caption"></div>
+			</div>
+
+			<div class="item" align="center">
+				<img src="resources/images//employee_introduce/ho.png" alt="메인사진4"
+					width="1250px" height="400px">
+				<div class="carousel-caption"></div>
+			</div>
+
+			<!-- Controls -->
+			<a class="left carousel-control" href="#carousel-example-generic"
+				role="button" data-slide="prev"> <span
+				class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+				<span class="sr-only">Previous</span>
+			</a> <a class="right carousel-control" href="#carousel-example-generic"
+				role="button" data-slide="next"> <span
+				class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+				<span class="sr-only">Next</span>
+			</a>
+		</div>
+	</div>
+
+
+
+	<table id="mainview">
+		<tr>
+			<td width="550">
+				<!-- 슬라이드 -->
+				<div id="empimg" class="carousel slide" data-ride="carousel">
+					<div class="emp-inner" role="listbox" align="center">
+						<div class="item active">
+							<img src="resources/images/employee_introduce/kull.png" alt="이병걸"
+								width="100%">
+						</div>
+						<div class="item" align="center">
+							<img src="resources/images/employee_introduce/jae.png" alt="김욱재"
+								width="100%">
+						</div>
+
+						<div class="item" align="center">
+							<img src="resources/images//employee_introduce/woo.png" alt="박준우"
+								width="100%">
+						</div>
+
+						<div class="item" align="center">
+							<img src="resources/images//employee_introduce/kook.png"
+								alt="김대국" width="100%">
+						</div>
+
+						<div class="item" align="center">
+							<img src="resources/images//employee_introduce/ho.png" alt="김준호"
+								width="100%">
+
+						</div>
+
+						<div class="item" align="center">
+							<img src="resources/images//employee_introduce/ram.png" alt="최예람"
+								width="100%">
+						</div>
+					</div>
+					<div class="emp-indicators">
+						<span data-target="#empimg" data-slide-to="0">이병걸</span> <span
+							data-target="#empimg" data-slide-to="1">김욱재</span> <span
+							data-target="#empimg" data-slide-to="2">박준우</span> <span
+							data-target="#empimg" data-slide-to="3">김대국</span> <span
+							data-target="#empimg" data-slide-to="4">김준호</span> <span
+							data-target="#empimg" data-slide-to="5">최예람</span>
+					</div>
+				</div>
+			</td>
+			<td rowspan="2" align="center">
+				<div id="booking">
+					<div id="choice">
+						<p>
+							예약날짜 <input style="" type="text" id="datepicker"
+								name="appointday" />
+						</p>
+						희망시간 <select name="hour">
+							<option value="09">09시
+							<option value="10">10시
+							<option value="11">11시
+							<option value="12">12시
+							<option value="13">13시
+							<option value="14">14시
+							<option value="15">15시
+							<option value="16">16시
+						</select><br> <br> <input type="radio" name="memberconsult"
+							value="offline" checked="checked">내원&nbsp;&nbsp;&nbsp;<input
+							type="radio" name="memberconsult" value="online">온라인
+					</div>
+					<div id="book">
+						<c:if test="${not empty pageContext.request.userPrincipal}">
+							<p onclick="ajaxselect('testresult')">예 약</p>
+						</c:if>
+						<c:if test="${empty pageContext.request.userPrincipal}">
+							<p onclick="layer_open('layer3');return false;">예 약</p>
+						</c:if>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<div id="onmain">
+					온라인 상담 게시판 <a href="onList"
+						style="background-color: #A6A6A6; border-radius: 10px; float: right; padding: 1px; font-size: xx-small; margin: 2px;">더보기+</a>
+					<table style="clear: both;">
+						<tr id="ontop">
+							<td width="50px;">번호</td>
+							<td width="300px;">제목</td>
+							<td width="150px">작성자</td>
+							<td width="150px">작성일</td>
+						</tr>
+						<c:forEach items="${ onList }" var="i" begin="0" end="4">
+							<tr>
+								<td>${ i.onNum}</td>
+								<td align="left"><a href="onContentview?onNum=${i.onNum }">${ i.onTitle }</td>
+								<td>${ i.onName }</td>
+								<td><fmt:formatDate value="${i.onDate}"
+										pattern="yyyy-MM-dd" /></td>
+							</tr>
+						</c:forEach>
+					</table>
+				</div>
+			</td>
+		</tr>
+	</table>
+	<div id="pop">
+		<div id="popreser"></div>
+		<div id="close">
+			<a href="#" class="button">닫기</a>
+		</div>
+	</div>
+</body>
+<link rel="stylesheet"
+	href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
+<script src="./resources/js/bootstrap.js"></script>
+<script src="./resources/js/bootstrap_emp.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$("#datepicker").datepicker(
+				{
+					dateFormat : 'yy-mm-dd',
+					monthNamesShort : [ '1월', '2월', '3월', '4월', '5월', '6월',
+							'7월', '8월', '9월', '10월', '11월', '12월' ],
+					dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ],
+					changeMonth : true, //월변경가능
+					changeYear : true, //년변경가능
+					showMonthAfterYear : true, //년 뒤에 월 표시
+				});
+	});
+	var ajaxselect = function(url) {
+		var _appointday = $("#datepicker").val(); //id값호출
+		var _appointhour = $("select[name=hour] ").val(); //name값 호출
+		var _memberconsult = $("input[type=radio][name=memberconsult]:checked")
+				.val();
+		if (_appointday == "") {
+			alert("날짜를 입력해 주세요")
+		} else {
+			$('#pop').show();
+			$('#close').click(function() {
+				$('#pop').hide();
+			});
+			$.ajax({
+				type : "POST",
+				url : url,
+				data : {
+					memberconsult : _memberconsult,
+					appointday : _appointday,
+					appointhour : _appointhour
+				}, //post 형식 전송형태 data: {인자명 :데이터, num:num},
+				success : function(msg) {
+					$("#popreser").html(msg);
+				}
+			});
+		}
+	};
+</script>
+</html>

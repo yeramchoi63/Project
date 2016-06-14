@@ -1,0 +1,42 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<style>
+table#asidest tr td {
+	text-align: center;
+	width: 150px;
+	height: 25px;
+}
+
+table#asidest tr td p {
+	margin: 10px auto;
+}
+
+table#asidest tr td:hover {
+	background-color: green;
+	border-radius: 50px;
+	cursor: pointer;
+}
+</style>
+<table id="asidest">
+	<tr>
+		<td><p onclick="ajaxmenu('ajax_gametherapy')">놀이치료</p></td>
+	</tr>
+	<tr>
+		<td><p onclick="ajaxmenu('ajax_arttherapy')">미술치료</p></td>
+	</tr>
+	<tr>
+		<td><p onclick="ajaxmenu('ajax_speechtherapy')">언어치료</p></td>
+	</tr>
+	<tr>
+		<td><p onclick="ajaxmenu('ajax_readtherapy')">독서치료</p></td>
+	</tr>
+	<tr>
+		<td><p onclick="ajaxmenu('ajax_musictherapy')">음악치료</p></td>
+	</tr>
+	<tr>
+		<td><p onclick="ajaxmenu('ajax_playtherapy')">연극치료</p></td>
+	</tr>
+	<tr>
+		<td><p onclick="ajaxmenu('ajax_mediatherapy')">미디어치료</p></td>
+	</tr>
+</table>
