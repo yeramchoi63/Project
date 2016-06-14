@@ -1,0 +1,26 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<style>
+table#asidest tr td {
+	text-align: center;
+	width: 150px;
+	height: 30px;
+}
+
+table#asidest tr td:hover {
+	background-color: green;
+	border-radius: 50px;
+	cursor: pointer;
+}
+</style>
+<table id="asidest">
+	<tr>
+		<td><p onclick="ajaxmenu('ajax_noList')">공지사항</p></td>
+	</tr>
+	<tr>
+		<td><p onclick="ajaxmenu('ajax_faqView')">FAQ</p></td>
+	</tr>
+	<tr>
+		<td><p onclick="ajaxmenu('ajax_onList')">온라인상담</p></td>
+	</tr>
+</table>

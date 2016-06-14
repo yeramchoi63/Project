@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+	"-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kosta.simli.dao.MemberDao">
+	
+	<select id="confirmID" parameterType="java.lang.String" resultType="int">
+		select count(*) from membertable where id = #{ id }
+	</select>
+	
+	<select id="userCheck" resultType="java.lang.String" parameterType="java.lang.String">
+		select id from membertable where id = #{ id }
+	</select>
+	
+	<select id="modifyCheckPwd" resultType="java.lang.String" parameterType="java.lang.String">
+		select pwd from membertable where id = #{ id }
+	</select>
+
+	<insert id="insertRole">
+		insert into role (id, role_name) values(#{id}, #{roleName})
+	</insert>
+
+	<insert id="join">
+		insert into membertable (id, pwd, name, email, phone, gender, birth, addr, mem_date)
+		values (#{id}, #{pwd}, #{name}, #{email}, #{phone}, #{gender}, #{birth}, #{addr}, sysdate)
+	</insert>
+
+	<select id="mypage" parameterType="java.lang.String" resultType="com.kosta.simli.dto.MemberDto">
+		select * from membertable where id = #{id}
+	</select>
+
+	<delete id="member_delete" parameterType="java.lang.String">
+		delete from membertable where id = #{id}
+	</delete>
+
+	<delete id="role_delete" parameterType="java.lang.String">
+		delete from role where id = #{id}
+	</delete>
+	
+	<select id="modify_view" parameterType="java.lang.String" resultType="com.kosta.simli.dto.MemberDto">
+		select * from membertable where id = #{id}
+	</select>
+	
+	<select id="member_phone" parameterType="java.lang.String" resultType="java.lang.String">
+		select phone from membertable where id = #{id}
+	</select>
+
+	<update id="member_modify" parameterType="com.kosta.simli.dto.MemberDto">
+		update membertable set pwd = #{pwd}, email = #{email}, phone = #{phone}, addr = #{addr}, therapy1 = #{ therapy1 }, therapy2 = #{ therapy2 }, therapy3 = #{ therapy3 }, part = #{ part } where id = #{ id }
+	</update>
+	
+	<select id="memberpart" resultType="java.lang.String">
+      select part from membertable where id = #{id}
+	</select>
+	
+</mapper>

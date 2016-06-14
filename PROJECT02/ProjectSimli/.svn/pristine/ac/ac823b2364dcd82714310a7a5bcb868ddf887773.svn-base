@@ -1,0 +1,33 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<style>
+table#asidest tr td {
+	text-align: center;
+	width: 150px;
+	height: 30px;
+}
+
+table#asidest tr td:hover {
+	background-color: green;
+	border-radius: 50px;
+	cursor: pointer;
+}
+</style>
+<table id="asidest">
+	<tr>
+		<td><p onclick="ajaxmenu('ajax_hellow_page')">
+				인사말</a></td>
+	</tr>
+	<tr>
+		<td><p onclick="ajaxmenu('ajax_emlpoyee_introduce')">
+				선생님소개</a></td>
+	</tr>
+	<tr>
+		<td><p onclick="ajaxmenu('ajax_video_guide')">
+				동영상소개</a></td>
+	</tr>
+	<tr>
+		<td><p onclick="ajaxmenu('ajax_operation_guide')">
+				이용안내</a></td>
+	</tr>
+</table>

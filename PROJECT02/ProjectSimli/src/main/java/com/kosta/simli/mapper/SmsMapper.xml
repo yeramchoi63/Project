@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kosta.simli.dao.SmsDao">
+	<insert id="insert">
+		insert into smstable(smstime, num,
+		fromid,smstitle,smscon,toid)
+		values(sysdate, sms_seq.nextval,
+		#{fromid}, #{smstitle}, #{smscon}, #{toid}, 'no')
+	</insert>
+	<select id="smslist" resultType="com.kosta.simli.dto.SmsDto">
+	<![CDATA[                                                               
+      select B.* from (select C.*, rownum R from
+         (select * from smstable where toid = #{param1.toid} order by smstime desc) C
+            where rownum <= #{param2.pageEnd}) B where R >= #{param2.pageStart}
+      ]]>
+	</select>
+	<select id="smsListCount" resultType="int">
+		select count(*) from
+		smstable
+	</select>
+	<select id="smsreadCount" resultType="int">
+		select count(*) from
+		smstable where toid = #{toid} and smsread = 'no'
+	</select>
+	<delete id="delete">
+		delete from smstable where num = #{num}
+	</delete>
+	<select id="consms" resultType="com.kosta.simli.dto.SmsDto">
+		select * from smstable where num
+		= #{num}
+	</select>
+	<update id="smsread">
+		update smstable set smsread = 'yes' where num =
+		#{num}
+	</update>
+	<select id="checkid" resultType="com.kosta.simli.dto.MemberDto">
+		select * from membertable where
+		id = #{toid}
+	</select>
+</mapper>
+	

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kosta.simli.dao.ReservationDao">
+
+
+	<insert id="insert">
+		insert into reservation(num,memberid,employeeid,currentday,appointday,appointtime,memberconsult,appointweek,categoryprice,appointcheck,resertype,consulttype,patron)
+		values(r_sequence.NEXTVAL,#{memberid},#{employeeid,jdbcType=VARCHAR},sysdate,to_date(#{appointday},'yyyy-mm-dd'),#{appointtime},#{memberconsult,jdbcType=VARCHAR},#{appointweek,jdbcType=VARCHAR},#{categoryprice},#{appointcheck,jdbcType=VARCHAR},#{resertype},#{consulttype,jdbcType=VARCHAR},#{patron,jdbcType=VARCHAR})
+	</insert>
+
+	<delete id="delete" parameterType="com.kosta.simli.dto.ReserDTO">
+		delete from reservation where appointday=#{appointday} and
+		appointtime=#{appointtime} and num=#{num}
+	</delete>
+
+	<update id="upid">
+		update reservation set employeeid = #{employeeid} where
+		appointday=#{appointday} and appointtime=#{appointtime} and num=#{num}
+	</update>
+
+	
+	
+	<select id ="search2" resultType="com.kosta.simli.dto.ReserDTO">
+		select * from reservation where resertype like '%%상담'
+	</select>
+	
+	<select id ="msearch" resultType="String">
+		select resertype from reservation where appointcheck='threpy waiting' and memberid = #{id}
+	</select>
+	
+	<select id ="consearch" resultType="com.kosta.simli.dto.ConresultDto">
+		select memberid from reservation where memberid = #{id}
+	</select>
+	
+	<select id="conresult" resultType="com.kosta.simli.dto.ConresultDto">
+	select r.num num,m.name name ,r.appointday appointday ,r.appointtime appointtime, r.memberconsult memberconsult, m.id id
+	 from reservation r,membertable m where r.memberid = m.id and r.resertype='상담'and appointcheck='waiting'  and r.appointday <![CDATA[<=]]> to_date(sysdate) and employeeid=#{id}
+
+     
+	</select>	
+	
+	<update id="therapyupdate">
+	update reservation set appointcheck='consulted' where memberid = #{memberid} and num=${num}
+	</update>
+	
+	<insert id="therapyinsert">
+	insert into reservation (num,memberid,resertype,appointcheck,appointweek,memberconsult,currentday,appointday,appointtime,categoryprice)
+	values
+	(r_sequence.NEXTVAL,#{memberid},#{resertype},'threpy waiting',#{appointweek, jdbcType=VARCHAR},#{memberconsult, jdbcType=VARCHAR},sysdate,to_date(#{appointday, jdbcType=VARCHAR},'yyyy-mm-dd'),#{appointtime, jdbcType=INTEGER},#{categoryprice, jdbcType=VARCHAR})
+	</insert>
+	
+	<update id="therapyreg">
+	update reservation set employeeid=#{employeeid},
+						   appointweek=#{appointweek},
+						   appointcheck=#{appointcheck},
+						   memberconsult=#{memberconsult},
+						   currentday= sysdate,
+						   appointday= to_date(#{appointday},'yyyy-mm-dd'),
+						   appointtime=#{appointtime},
+						   categoryprice=#{categoryprice}
+	where memberid = #{memberid} and consulttype is null
+	</update>
+	
+	<select id="conready" resultType="com.kosta.simli.dto.ReserDTO">
+	   	select * from reservation where resertype='상담' and appointday = to_date(sysdate) and employeeid =#{employeeid}
+	</select>
+	
+	
+	<select id ="exsearch" resultType="com.kosta.simli.dto.ReserDTO">
+		select * from reservation where resertype like '%%검사'
+	</select>
+	
+	<select id="patronsearch" resultType="String" parameterType="String">
+	select id from membertable where id =#{param}
+	</select>
+	
+	<select id="partsearch" resultType="String" parameterType="String">
+	select part from membertable where id =#{param}
+	</select>
+	
+	
+	<select id="threapyoverlap" resultType="com.kosta.simli.dto.ConresultDto">
+	select * from reservation where memberid = #{memberid} and employeeid is null
+	</select>
+	
+</mapper>
